@@ -88,14 +88,22 @@ public class Rational implements Comparable {
     }
     public int compareTo(Object other) {
 	int retInt=0;
-	if (!(other instanceof Rational)) throw new ClassCastException ("");
-	else {
+	if (!(other instanceof Comparable)) throw new ClassCastException ("");
+	else if (other instanceof Rational) {
 	    this.subtract((Rational)other);
 	    if (this.floatValue() > 0) retInt=1;
 	    else if (this.floatValue() < 0) retInt=-1;
 	    this.add((Rational)other);
-	    return retInt;
 	}
+	else if ((other instanceof Binary)) {
+	    Rational othR = new Rational( Binary.binToDec(other.toString()),1);
+	    this.compareTo(othR);
+	}
+	else if ((other instanceof Hexadecimal)) {
+	    Rational othR = new Rational( Hexadecimal.hexToDec(other.toString()),1);
+	    this.compareTo(othR);
+	}
+	return retInt;
     }
 
     public void multiply(Rational r)

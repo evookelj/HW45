@@ -111,25 +111,20 @@ public class SuperArray implements Comparable{
     public static void main( String[] args ) {
 		//Rational array
         SuperArray jerry = new SuperArray();
-	jerry.add(new Rational(23, 12));
-	jerry.add(new Rational(9, 84));
+	jerry.add(new Rational(24, 12));
+	jerry.add(new Rational(9, 27));
 	jerry.add(new Binary(8));
-	jerry.add(new Binary("1000"));
+	jerry.add(new Binary("10"));
 	jerry.add(new Hexadecimal(79));
 	jerry.add(new Hexadecimal("4F"));
 	System.out.println("jerry:\t" + jerry);
-
-	jerry.remove(3);
-	System.out.println("remove@3:\t" + jerry);
-	jerry.remove(3);
-	System.out.println("remove@3:\t" + jerry);
 	
-	jerry.add(3, new Rational(3, 5));
-	System.out.println("insert Rational:\t" + jerry);
-	jerry.add(2, new Binary(16));
-	System.out.println("insert Binary:\t" + jerry);
-	jerry.add(1, new Hexadecimal(135));
-	System.out.println("insert Hex:\t" + jerry);
+	for (int i=0; i < jerry._size-1; i++) {
+	    System.out.println("jerry._data[" + i + "]:\t" + jerry.get(i) +
+			       "\njerry._data[" + (i+1) + "]:\t" + jerry.get(i+1) +
+			       "\ncompare:\t" +
+			       jerry.get(i).compareTo(jerry.get(i+1)) + "\n");
+	}
     }//end main
 		
 }//end class

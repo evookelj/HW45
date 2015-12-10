@@ -161,14 +161,31 @@ public class Hexadecimal implements Comparable {
       negative integer if this<input, positive integer otherwise
     =============================================*/
     public int compareTo( Object other ) {
-	if (!(other instanceof Hexadecimal)) //catches an incorrect input error
+	int retInt=0;
+	if (!(other instanceof Comparable)) //catches an incorrect input error
 	    throw new ClassCastException ("\ncompareTo() input not a Hexadecimal");
-	int othDec = ((Hexadecimal)other)._decNum;
-	if (_decNum > othDec) {
-	    return 1;
-	} else if (_decNum == othDec) {
-	    return 0;
-	} return -1;
+
+	if (other instanceof Hexadecimal) {
+	    int othDec = ((Hexadecimal)other)._decNum;
+	    if (_decNum > othDec) {
+		retInt =1;
+	    } else if (_decNum == othDec) {
+		retInt=0;
+	    } else {
+		retInt =-1;
+	    }
+	}
+
+	if (other instanceof Binary) {
+	    Hexadecimal othH = new Hexadecimal(Binary.binToDec(other.toString()));
+	    this.compareTo(othH);
+	}
+
+	if (other instanceof Rational) {
+	    Rational thisB = new Rational(_decNum,1);
+	    thisB.compareTo(other);
+	}
+	return retInt;
     }
 
     //main method for testing

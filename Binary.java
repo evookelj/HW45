@@ -156,15 +156,28 @@ public class Binary implements Comparable {
     =============================================*/
 
     public int compareTo( Object other ) {
-	if (!(other instanceof Binary)) throw new ClassCastException ("");
-	else {
+	int retInt=0;
+	if (!(other instanceof Comparable)) throw new ClassCastException ("");
+	else if (other instanceof Binary) {
 	    int othDec = ((Binary)other)._decNum;
 	    if (_decNum > othDec) {
-		return 1;
-	    } else if (_decNum == othDec) {
-		return 0;
-	    } return -1;
+		retInt = 1;
+	    } else if (_decNum < othDec) {
+		retInt = -1;
+	    } else {
+		retInt = 0;
+	    }
 	}
+	else if (other instanceof Hexadecimal) {
+	    Binary othB = new Binary(Hexadecimal.hexToDec(other.toString()));
+	    retInt = this.compareTo(othB);
+	}
+	else if (other instanceof Rational) {
+	    Rational thisR = new Rational(_decNum,1);
+	    retInt = thisR.compareTo(other);
+	}
+
+	return retInt;
     }
 
     //main method for testing
