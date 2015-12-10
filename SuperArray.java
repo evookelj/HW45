@@ -1,4 +1,4 @@
-public class SuperArray implements Comparable{
+public class SuperArray {
  
     //~~~~~INSTANCE VARS~~~~~
     //underlying container, or "core" of this data structure:
@@ -23,11 +23,6 @@ public class SuperArray implements Comparable{
 	    if (_data[i].compareTo(_data[i+1]) > 0) return false;
 	}
 	return true;
-    }
-
-    public int compareTo(Object other) {
-        if (_data == ((SuperArray)other)._data) return 0;
-	else return 1;
     }
 		
     //output array in [a,b,c] format, eg
